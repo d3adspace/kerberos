@@ -31,7 +31,7 @@ import java.sql.SQLException;
 import java.text.MessageFormat;
 
 /**
- * Basic Database impkementation.
+ * Basic Database implementation.
  *
  * @author Felix 'SasukeKawaii' Klauke
  */
