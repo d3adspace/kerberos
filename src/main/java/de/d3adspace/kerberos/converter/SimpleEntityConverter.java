@@ -27,12 +27,22 @@ import de.d3adspace.kerberos.metadata.EntityMetaContainer;
 import de.d3adspace.kerberos.property.EntityProperty;
 
 /**
+ * Basic converter implementation.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class SimpleEntityConverter<EntityType> implements EntityConverter<EntityType> {
 	
+	/**
+	 * Container for entity metadata.
+	 */
 	private final EntityMetaContainer metaContainer;
 	
+	/**
+	 * Create a new entity converter.
+	 *
+	 * @param metaContainer The metadata container.
+	 */
 	SimpleEntityConverter(EntityMetaContainer metaContainer) {
 		this.metaContainer = metaContainer;
 	}

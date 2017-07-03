@@ -28,7 +28,14 @@ package de.d3adspace.kerberos.metadata;
  */
 public class EntityMetaFactory {
 	
-	public static EntityMeta createEntityMeta(Class<?> entityClazz) {
+	/**
+	 * Create a new metadata.
+	 *
+	 * @param entityClazz The entity class.
+	 *
+	 * @return The entity meta.
+	 */
+	static EntityMeta createEntityMeta(Class<?> entityClazz) {
 		return new ReflectedEntityMeta(entityClazz);
 	}
 }

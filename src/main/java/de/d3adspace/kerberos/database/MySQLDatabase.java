@@ -31,12 +31,22 @@ import java.sql.SQLException;
 import java.text.MessageFormat;
 
 /**
+ * Basic Database impkementation.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class MySQLDatabase implements Database {
 	
+	/**
+	 * Underlying connection.
+	 */
 	private Connection connection;
 	
+	/**
+	 * Create a database by a config.
+	 *
+	 * @param config The config.
+	 */
 	MySQLDatabase(KerberosConfig config) {
 		try {
 			String url = MessageFormat

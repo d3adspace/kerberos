@@ -22,16 +22,46 @@
 package de.d3adspace.kerberos.config;
 
 /**
+ * Kerberos main config.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class KerberosConfig {
 	
+	/**
+	 * The database host.
+	 */
 	private String databaseHost;
+	
+	/**
+	 * The database port.
+	 */
 	private String databasePort;
+	
+	/**
+	 * The database name.
+	 */
 	private String databaseName;
+	
+	/**
+	 * The database user.
+	 */
 	private String databaseUser;
+	
+	/**
+	 * The database password.
+	 */
 	private String databasePassword;
 	
+	/**
+	 * Create a new config.
+	 *
+	 * @param databaseHost The database host.
+	 * @param databasePort The database port.
+	 * @param databaseName The database name.
+	 * @param databaseUser The database user.
+	 * @param databasePassword The database password.
+	 */
 	KerberosConfig(String databaseHost, String databasePort, String databaseName,
 		String databaseUser, String databasePassword) {
 		this.databaseHost = databaseHost;
@@ -41,26 +71,56 @@ public class KerberosConfig {
 		this.databasePassword = databasePassword;
 	}
 	
+	/**
+	 * Create a new builder.
+	 *
+	 * @return The builder.
+	 */
 	public static KerberosConfigBuilder newBuilder() {
 		return new KerberosConfigBuilder();
 	}
 	
+	/**
+	 * Get the database host.
+	 *
+	 * @return The database host.
+	 */
 	public String getDatabaseHost() {
 		return databaseHost;
 	}
 	
+	/**
+	 * Get the database name.
+	 *
+	 * @return The database name.
+	 */
 	public String getDatabaseName() {
 		return databaseName;
 	}
 	
+	/**
+	 * Get the database password.
+	 *
+	 * @return The database password.
+	 */
 	public String getDatabasePassword() {
 		return databasePassword;
 	}
 	
+	/**
+	 * Get the database port.
+	 *
+	 * @return The database port.
+	 */
 	public String getDatabasePort() {
 		return databasePort;
 	}
 	
+	/**
+	 * Get the database user.
+	 *
+	 * @return The database user.
+	 */
 	public String getDatabaseUser() {
 		return databaseUser;
 	}

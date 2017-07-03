@@ -24,10 +24,19 @@ package de.d3adspace.kerberos;
 import de.d3adspace.kerberos.config.KerberosConfig;
 
 /**
+ * Factory for all kerberos instances.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class KerberosFactory {
 	
+	/**
+	 * Create a kerberos instance.
+	 *
+	 * @param config The config.
+	 *
+	 * @return The kerberos instance.
+	 */
 	public static Kerberos createKerberos(KerberosConfig config) {
 		return new SimpleKerberos(config);
 	}

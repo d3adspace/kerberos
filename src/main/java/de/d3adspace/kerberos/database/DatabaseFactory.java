@@ -24,12 +24,23 @@ package de.d3adspace.kerberos.database;
 import de.d3adspace.kerberos.config.KerberosConfig;
 
 /**
+ * Factory for database instance. Safe singleton.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class DatabaseFactory {
 	
+	/**
+	 * Database instance.
+	 */
 	private static Database database;
 	
+	/**
+	 * Create a new database by a config.
+	 *
+	 * @param config The config.
+	 * @return The database.
+	 */
 	public static Database createDatabase(KerberosConfig config) {
 		if (database == null) {
 			database = new MySQLDatabase(config);

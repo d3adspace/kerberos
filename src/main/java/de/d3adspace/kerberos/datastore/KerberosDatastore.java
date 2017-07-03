@@ -28,15 +28,38 @@ import de.d3adspace.kerberos.database.Database;
 import de.d3adspace.kerberos.database.DatabaseObject;
 
 /**
+ * Basic datastore implementation.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class KerberosDatastore<EntityType> implements Datastore<EntityType> {
 	
+	/**
+	 * The converter.
+	 */
 	private final EntityConverter<EntityType> converter;
+	
+	/**
+	 * The database.
+	 */
 	private final Database database;
+	
+	/**
+	 * The class of the entity.
+	 */
 	private final Class<? extends EntityType> entityClass;
+	
+	/**
+	 * Entity meta data.
+	 */
 	private final Entity entityMetaData;
 	
+	/**
+	 * Create a new datastore.
+	 *
+	 * @param database The database.
+	 * @param entityClass The entity class.
+	 */
 	KerberosDatastore(Database database, Class<? extends EntityType> entityClass) {
 		this.database = database;
 		this.entityClass = entityClass;
@@ -44,16 +67,32 @@ public class KerberosDatastore<EntityType> implements Datastore<EntityType> {
 		this.entityMetaData = entityClass.getAnnotation(Entity.class);
 	}
 	
+	/**
+	 * Persist an entity.
+	 *
+	 * @param entity The entity.
+	 */
 	public void save(EntityType entity) {
 		DatabaseObject databaseObject = this.converter.toDatabaseObject(entity);
 		
 		this.database.saveObject(this.entityMetaData, databaseObject);
 	}
 	
+	/**
+	 * Delete an entity by its id.
+	 *
+	 * @param entityId The entity id.
+	 */
 	public void delete(String entityId) {
 		this.database.deleteObject(this.entityMetaData, entityId);
 	}
 	
+	/**
+	 * Retrieve an entity by id.
+	 *
+	 * @param entityId The entity id.
+	 * @return The entity.
+	 */
 	public EntityType get(String entityId) {
 		DatabaseObject databaseObject = this.database.getObject(this.entityMetaData, entityId);
 		

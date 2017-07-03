@@ -24,12 +24,28 @@ package de.d3adspace.kerberos.converter;
 import de.d3adspace.kerberos.database.DatabaseObject;
 
 /**
+ * Basic converter interface.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public interface EntityConverter<EntityType> {
 	
+	/**
+	 * Convert entity to database object.
+	 *
+	 * @param entity The entity.
+	 *
+	 * @return The database object.
+	 */
 	DatabaseObject toDatabaseObject(EntityType entity);
 	
+	/**
+	 * Convert a database object to an entity.
+	 *
+	 * @param databaseObject The database object.
+	 * @param entityClass The entity class.
+	 * @return The entity.
+	 */
 	EntityType fromDatabaseObject(DatabaseObject databaseObject,
 		Class<? extends EntityType> entityClass);
 }

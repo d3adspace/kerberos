@@ -28,18 +28,39 @@ import de.d3adspace.kerberos.datastore.Datastore;
 import de.d3adspace.kerberos.datastore.DatastoreFactory;
 
 /**
+ * Basic Kerberos implementation.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class SimpleKerberos implements Kerberos {
 	
+	/**
+	 * The underlying database.
+	 */
 	private final Database database;
+	
+	/**
+	 * The underlying config.
+	 */
 	private final KerberosConfig config;
 	
+	/**
+	 * Create a new kerberos instance by a config.
+	 *
+	 * @param config The config.
+	 */
 	SimpleKerberos(KerberosConfig config) {
 		this.config = config;
 		this.database = DatabaseFactory.createDatabase(config);
 	}
 	
+	/**
+	 * Create a new datastore.
+	 *
+	 * @param entityClass The class of the entity.
+	 * @param <EntityType> The entity type.
+	 * @return The datastore.
+	 */
 	public <EntityType> Datastore<EntityType> openDatastore(
 		Class<? extends EntityType> entityClass) {
 		return DatastoreFactory.createDatastore(database, entityClass);

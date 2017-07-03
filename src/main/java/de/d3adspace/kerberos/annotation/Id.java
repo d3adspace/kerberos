@@ -27,6 +27,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Indicates the Id field.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 @Retention(RetentionPolicy.RUNTIME)

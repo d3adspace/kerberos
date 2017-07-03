@@ -24,13 +24,34 @@ package de.d3adspace.kerberos.database;
 import de.d3adspace.kerberos.annotation.Entity;
 
 /**
+ * Basic Database interface.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public interface Database {
 	
+	/**
+	 * Persist a database object.
+	 *
+	 * @param entity The entity meta.
+	 * @param databaseObject The database object.
+	 */
 	void saveObject(Entity entity, DatabaseObject databaseObject);
 	
+	/**
+	 * Delete a database object.
+	 *
+	 * @param entity The entity meta.
+	 * @param entityId The entity id.
+	 */
 	void deleteObject(Entity entity, String entityId);
 	
+	/**
+	 * Retrieve a database object.
+	 *
+	 * @param entity The entity meta.
+	 * @param entityId The entity id.
+	 * @return The database object.
+	 */
 	DatabaseObject getObject(Entity entity, String entityId);
 }

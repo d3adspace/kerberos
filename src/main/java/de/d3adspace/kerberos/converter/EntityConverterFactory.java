@@ -24,10 +24,19 @@ package de.d3adspace.kerberos.converter;
 import de.d3adspace.kerberos.metadata.EntityMetaContainer;
 
 /**
+ * Factory for converters.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class EntityConverterFactory {
 	
+	/**
+	 * Create a new entity converter.
+	 *
+	 * @param <EntityType> The entity type.
+	 *
+	 * @return The entity converter.
+	 */
 	public static <EntityType> EntityConverter<EntityType> createEntityConverter() {
 		EntityMetaContainer metaContainer = new EntityMetaContainer();
 		

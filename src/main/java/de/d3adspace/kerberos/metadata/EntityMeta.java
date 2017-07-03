@@ -38,5 +38,10 @@ public interface EntityMeta {
 	 */
 	List<EntityProperty> getEntityProperties();
 	
+	/**
+	 * Get the property that represents the id.
+	 *
+	 * @return The property.
+	 */
 	EntityProperty getEntityIdProperty();
 }

@@ -29,20 +29,39 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
+ * Representing a database object.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class DatabaseObject {
 	
+	/**
+	 * The underlying map containing the data.
+	 */
 	private final Map<String, Object> columnValuesData;
 	
+	/**
+	 * Create a database object by column data.
+	 *
+	 * @param columnValues The data.
+	 */
 	public DatabaseObject(Map<String, Object> columnValues) {
 		this.columnValuesData = columnValues;
 	}
 	
+	/**
+	 * Create an empty database object.
+	 */
 	public DatabaseObject() {
 		this(new HashMap<>());
 	}
 	
+	/**
+	 * Create a database object by a mysql ResultSet.
+	 *
+	 * @param resultSet The result set.
+	 * @return The database object.
+	 */
 	static DatabaseObject fromResultSet(ResultSet resultSet) {
 		DatabaseObject databaseObject = new DatabaseObject();
 		
@@ -62,32 +81,69 @@ public class DatabaseObject {
 		return databaseObject;
 	}
 	
+	/**
+	 * Get the underlying data.
+	 *
+	 * @return The data.
+	 */
 	public Map<String, Object> getColumnValuesData() {
 		return columnValuesData;
 	}
 	
+	/**
+	 * Get string joined column names ready for sql query.
+	 *
+	 * @return The list.
+	 */
 	String getColumnValues() {
 		return this.columnValuesData.values().stream().map(Object::toString).map(s -> "'" + s + "'")
 			.collect(Collectors.joining(", "));
 	}
 	
+	/**
+	 * Set column data.
+	 *
+	 * @param columnName The name of the column.
+	 * @param value The value.
+	 */
 	public void setColumnValue(String columnName, Object value) {
 		this.columnValuesData.put(columnName, value);
 	}
 	
+	/**
+	 * Get the column data by a field name.
+	 *
+	 * @param fieldName The field name.
+	 * @return The value.
+	 */
 	public Object getColumnValue(String fieldName) {
 		return columnValuesData.get(fieldName);
 	}
 	
+	/**
+	 * Get the string joined column names.
+	 *
+	 * @return The list.
+	 */
 	String getColumnNames() {
 		return this.columnValuesData.keySet().stream().collect(Collectors.joining(", "));
 	}
 	
+	/**
+	 * Generate a string joined list of all column ready for update queries.
+	 *
+	 * @return The list.
+	 */
 	String getColumnUpdates() {
 		return this.columnValuesData.entrySet().stream().map(entry -> entry.getKey() + "=?")
 			.collect(Collectors.joining(", "));
 	}
 	
+	/**
+	 * Get the column count.
+	 *
+	 * @return The column count.
+	 */
 	int getColumnCount() {
 		return columnValuesData.size();
 	}

@@ -22,13 +22,31 @@
 package de.d3adspace.kerberos.datastore;
 
 /**
+ * Basic datastore interface.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public interface Datastore<EntityType> {
 	
+	/**
+	 * Upsert a given entity.
+	 *
+	 * @param entity The entity.
+	 */
 	void save(EntityType entity);
 	
+	/**
+	 * Delete an entity.
+	 *
+	 * @param entityId The entity id.
+	 */
 	void delete(String entityId);
 	
+	/**
+	 * Retrieve an entity by its id.
+	 *
+	 * @param entityId The entity id.
+	 * @return The entity.
+	 */
 	EntityType get(String entityId);
 }

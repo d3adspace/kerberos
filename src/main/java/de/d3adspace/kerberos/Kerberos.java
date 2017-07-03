@@ -24,9 +24,19 @@ package de.d3adspace.kerberos;
 import de.d3adspace.kerberos.datastore.Datastore;
 
 /**
+ * Central kerberos interface.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public interface Kerberos {
 	
+	/**
+	 * Open a new datastore.
+	 *
+	 * @param entityClass The class of the entity.
+	 * @param <EntityType> The entity type.
+	 *
+	 * @return The entity.
+	 */
 	<EntityType> Datastore<EntityType> openDatastore(Class<? extends EntityType> entityClass);
 }

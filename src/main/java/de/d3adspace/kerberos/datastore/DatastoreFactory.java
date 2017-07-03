@@ -24,11 +24,22 @@ package de.d3adspace.kerberos.datastore;
 import de.d3adspace.kerberos.database.Database;
 
 /**
+ * Factory for all datastores.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class DatastoreFactory {
 	
-	public static <EntityType> Datastore createDatastore(Database database,
+	/**
+	 * Create a new data store.
+	 *
+	 * @param database The database.
+	 * @param entityClass The entity class.
+	 * @param <EntityType> The entity type.
+	 *
+	 * @return The entity.
+	 */
+	public static <EntityType> Datastore<EntityType> createDatastore(Database database,
 		Class<? extends EntityType> entityClass) {
 		return new KerberosDatastore(database, entityClass);
 	}

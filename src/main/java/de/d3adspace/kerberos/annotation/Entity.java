@@ -27,11 +27,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Indicates that the given class is an entity.
+ *
  * @author Felix 'SasukeKawaii' Klauke
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Entity {
 	
+	/**
+	 * The table the entity should be stored in.
+	 *
+	 * @return The table name.
+	 */
 	String table();
 }
