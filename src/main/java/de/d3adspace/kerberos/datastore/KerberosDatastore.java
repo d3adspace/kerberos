@@ -26,6 +26,7 @@ import de.d3adspace.kerberos.converter.EntityConverter;
 import de.d3adspace.kerberos.converter.EntityConverterFactory;
 import de.d3adspace.kerberos.database.Database;
 import de.d3adspace.kerberos.database.DatabaseObject;
+import de.d3adspace.kerberos.watcher.EntityWatcher;
 
 /**
  * Basic datastore implementation.
@@ -55,14 +56,21 @@ public class KerberosDatastore<EntityType> implements Datastore<EntityType> {
 	private final Entity entityMetaData;
 	
 	/**
-	 * Create a new datastore.
-	 *
-	 * @param database The database.
-	 * @param entityClass The entity class.
+	 * The entity watcher
 	 */
-	KerberosDatastore(Database database, Class<? extends EntityType> entityClass) {
+	private EntityWatcher<EntityType> entityWatcher;
+	
+	/**
+	 * Create a new datastore.
+	 *  @param database The database.
+	 * @param entityClass The entity class.
+	 * @param entityWatcher The entity watcher.
+	 */
+	KerberosDatastore(Database database, Class<? extends EntityType> entityClass,
+		EntityWatcher<EntityType> entityWatcher) {
 		this.database = database;
 		this.entityClass = entityClass;
+		this.entityWatcher = entityWatcher;
 		this.converter = EntityConverterFactory.createEntityConverter();
 		this.entityMetaData = entityClass.getAnnotation(Entity.class);
 	}
@@ -74,6 +82,8 @@ public class KerberosDatastore<EntityType> implements Datastore<EntityType> {
 	 */
 	public void save(EntityType entity) {
 		DatabaseObject databaseObject = this.converter.toDatabaseObject(entity);
+		
+		this.entityWatcher.prePersist(entity, databaseObject);
 		
 		this.database.saveObject(this.entityMetaData, databaseObject);
 	}
@@ -96,6 +106,10 @@ public class KerberosDatastore<EntityType> implements Datastore<EntityType> {
 	public EntityType get(String entityId) {
 		DatabaseObject databaseObject = this.database.getObject(this.entityMetaData, entityId);
 		
-		return this.converter.fromDatabaseObject(databaseObject, this.entityClass);
+		EntityType entity = this.converter.fromDatabaseObject(databaseObject, this.entityClass);
+		
+		this.entityWatcher.postLoad(entity, databaseObject);
+		
+		return entity;
 	}
 }

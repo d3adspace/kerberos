@@ -21,7 +21,10 @@
 
 package de.d3adspace.kerberos.datastore;
 
+import de.d3adspace.kerberos.annotation.Watcher;
 import de.d3adspace.kerberos.database.Database;
+import de.d3adspace.kerberos.watcher.EmptyEntityWatcher;
+import de.d3adspace.kerberos.watcher.EntityWatcher;
 
 /**
  * Factory for all datastores.
@@ -41,6 +44,34 @@ public class DatastoreFactory {
 	 */
 	public static <EntityType> Datastore<EntityType> createDatastore(Database database,
 		Class<? extends EntityType> entityClass) {
-		return new KerberosDatastore(database, entityClass);
+		
+		EntityWatcher<EntityType> entityWatcher = new EmptyEntityWatcher<>();
+		
+		if (entityClass.isAnnotationPresent(Watcher.class)) {
+			try {
+				entityWatcher = entityClass.getAnnotation(Watcher.class).watcher().newInstance();
+			} catch (InstantiationException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return createDatastore(database, entityClass, entityWatcher);
+	}
+	
+	/**
+	 * Create a new data store.
+	 *
+	 * @param database The database.
+	 * @param entityClass The entity class.
+	 * @param <EntityType> The entity type.
+	 * @param entityWatcher The entity watcher.
+	 *
+	 * @return The entity.
+	 */
+	public static <EntityType> Datastore<EntityType> createDatastore(Database database,
+		Class<? extends EntityType> entityClass,
+		EntityWatcher<EntityType> entityWatcher) {
+		
+		return new KerberosDatastore<>(database, entityClass, entityWatcher);
 	}
 }
