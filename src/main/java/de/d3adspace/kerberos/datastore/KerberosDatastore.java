@@ -98,6 +98,17 @@ public class KerberosDatastore<EntityType> implements Datastore<EntityType> {
 	}
 	
 	/**
+	 * Delete an entity.
+	 *
+	 * @param entity The entity.
+	 */
+	public void delete(EntityType entity) {
+		String entityId = this.converter.extractEntityId(entity);
+		
+		this.delete(entityId);
+	}
+	
+	/**
 	 * Retrieve an entity by id.
 	 *
 	 * @param entityId The entity id.

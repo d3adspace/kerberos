@@ -82,4 +82,10 @@ public class SimpleEntityConverter<EntityType> implements EntityConverter<Entity
 		
 		return null;
 	}
+	
+	@Override
+	public String extractEntityId(EntityType entity) {
+		EntityMeta entityMeta = this.metaContainer.getEntityMeta(entity.getClass());
+		return String.valueOf(entityMeta.getEntityIdProperty().get(entity));
+	}
 }

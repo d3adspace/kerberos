@@ -48,4 +48,13 @@ public interface EntityConverter<EntityType> {
 	 */
 	EntityType fromDatabaseObject(DatabaseObject databaseObject,
 		Class<? extends EntityType> entityClass);
+	
+	/**
+	 * Extract the id from an entity.
+	 *
+	 * @param entity The entity.
+	 *
+	 * @return The entity id.
+	 */
+	String extractEntityId(EntityType entity);
 }
