@@ -1,5 +1,7 @@
 # Kerberos
 
+Caution: Just a PoC and not longer maintained. You may have a look at https://github.com/FelixKlauke/psycho
+
 A very simple and lightweight framework to store entities in mySQL databases. This is
 absolutely experimental and not really ready to use. 
 
